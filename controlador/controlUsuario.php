@@ -4,15 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script type="text/javascript">
-		body=document.getElementById('body');
-		function confirmarRegistro () {
-			
-			alert("Registro exitoso");
-		}
-
-		body.addEventListener(confirmarRegistro());
-	</script>
+	
 </head>
 <body id="body" >
 
@@ -27,7 +19,17 @@ require '../modelo/Usuario.php';
 
 $nuevoUsuario=new Usuario($usuario,$clave);
 
-$nuevoUsuario->registrarUsuario();
+if (isset($_POST['registrar'])) {//este es un botn el cual es del formulario de registro
+	echo "boton registrar";
+	$nuevoUsuario->registrarUsuario();
+}else if (isset($_POST['ingresar'])) {//y este boton cporresponde al frm de ingreso de usuarios
+	$nuevoUsuario->ingresoUsuario($clave);
+}
+
+
+
+
+
 
 
 
@@ -35,7 +37,7 @@ $nuevoUsuario->registrarUsuario();
 
 <?php  
 //header("location: ../vista/index.html");
-echo "bienvenido $usuario clave ".$nuevoUsuario->getContraseña();
+//echo "bienvenido $usuario clave ".$nuevoUsuario->getContraseña();
  ?>
 
 
