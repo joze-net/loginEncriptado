@@ -2,14 +2,16 @@
 class Usuario{
 
 	private $nombre;
-	private $contraseña;
+	private $contraseñaEncriptada;
 
 	
 
 	function Usuario($nom,$contra){
 
 		$this->nombre=$nom;
-		$this->contraseña=$contra;
+		$contraseña=$contra;
+		$this->contraseñaEncriptada=password_hash($contraseña,PASSWORD_DEFAULT);
+
 
 	}
 
@@ -18,7 +20,7 @@ class Usuario{
 	}
 
 	function getContraseña(){
-		return $this->contraseña;
+		return $this->contraseñaEncriptada;
 	}
 
 	function registrarUsuario(){
@@ -27,7 +29,7 @@ class Usuario{
 			$conexion=new Conecta();//conecta es la clase que se encarga de realizar la conexion a db
 			
 			try {
-				$sql="insert into Usuario (usuNombre,usuPassword) values ('$this->nombre','$this->contraseña')";//consulta con marcadores
+				$sql="insert into Usuario (usuNombre,usuPassword) values ('$this->nombre','$this->contraseñaEncriptada')";//consulta con marcadores
 				$registro=$conexion->conectar()->prepare($sql);//la funcion conectar devuelve una conexion y con ella preparamos la consulta
 				
 				$registro->execute();//ejecutamos la consulta preparada

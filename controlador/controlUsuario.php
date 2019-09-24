@@ -33,8 +33,9 @@ $nuevoUsuario->registrarUsuario();
 
 ?>
 
-<?php 
-header("location: ../vista/index.html");
+<?php  
+//header("location: ../vista/index.html");
+echo "bienvenido $usuario clave ".$nuevoUsuario->getContraseña();
  ?>
 
 
